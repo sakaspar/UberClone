@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Fi Thnity{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <!--Favicon -->
+    <link rel="icon" href="{{ ('favicon.html') }}" type="image/x-icon"/>
+
+    <!--Bootstrap.min css-->
+    <link rel="stylesheet" href="{{ ('back/plugins/bootstrap/css/bootstrap.min.css') }}">
+
+    <!--Icons css-->
+    <link rel="stylesheet" href="{{ ('back/css/icons.css') }}">
+
+    <!--mCustomScrollbar css-->
+    <link rel="stylesheet" href="{{ ('back/plugins/scroll-bar/jquery.mCustomScrollbar.css') }}">
+
+    <!--gallery css-->
+    <link rel="stylesheet" href="{{ ('back/plugins/gallery/main.css') }}">
+
+    <!--Style css-->
+    <link rel="stylesheet" href="{{ ('back/css/style.css') }}">
+
+    <!--Sidemenu css-->
+    <link rel="stylesheet" href="{{ ('back/plugins/toggle-menu/sidemenu.css') }}">
+</head>
+<body class="app ">
+{% block header %}
+<!--anv open-->
+<nav class="navbar navbar-expand-lg main-navbar">
+    <a class="header-brand" href="index-2.html">
+       <h2>Fi Thnity</h2>
+    </a>
+    <ul class="navbar-nav navbar-right">
+
+        <li class="dropdown dropdown-list-toggle d-none d-lg-block">
+            <a href="#" class="nav-link nav-link-lg full-screen-link">
+                <i class="fa fa-expand " id="fullscreen-button"></i>
+            </a>
+        </li>
+
+    </ul>
+</nav>
+<!--nav closed-->
+<!--app-content open-->
+<div class="app-content">
+    <section class="section">
+
+
+        <!--aside open-->
+        <aside class="app-sidebar">
+            <div class="app-sidebar__user">
+                <div class="dropdown user-pro-body text-center">
+                    <div class="nav-link pl-1 pr-1 leading-none ">
+                        <img src="{{ ('back/img/user.png') }}" alt="user-img" class="avatar-xl rounded-circle mb-1">
+                        <span class="pulse bg-success" aria-hidden="true"></span>
+                    </div>
+                    <div class="user-info">
+                        <h6 class=" mb-1 text-dark">ADMIN</h6>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="side-menu">
+
+
+                <li class="slide">
+                    <a class="slide-item" href="CCar"><span>Confirm Cars </span></a>
+                </ul>
+                </li>
+                <li class="slide">
+                    <a class="slide-item"  href="CDriver"><span>Gerer Driver</span></a>                </li>
+
+            </ul>
+        </aside>
+        <!--aside closed-->
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+        {% block javascripts %}
+            <!--Jquery.min js-->
+            <script src="{{ ('back/js/jquery.min.js') }}"></script>
+
+            <!--popper js-->
+            <script src="{{ ('back/js/popper.js') }}"></script>
+
+            <!--Tooltip js-->
+            <script src="{{ ('back/js/tooltip.js') }}"></script>
+
+            <!--Bootstrap.min js-->
+            <script src="{{ ('back/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+
+            <!-- Jquery star rating-->
+            <script src="{{ ('back/plugins/rating/jquery.rating-stars.js') }}"></script>
+
+            <!--Jquery.nicescroll.min js-->
+            <script src="{{ ('back/plugins/nicescroll/jquery.nicescroll.min.js') }}"></script>
+
+            <!--Scroll-up-bar.min js-->
+            <script src="{{ ('back/plugins/scroll-up-bar/dist/scroll-up-bar.min.js') }}"></script>
+
+            <!--mCustomScrollbar js-->
+            <script src="{{ ('back/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+
+            <!--Sidemenu js-->
+            <script src="{{ ('back/plugins/toggle-menu/sidemenu.js') }}"></script>
+
+            <!--Scripts js-->
+            <script src="{{ ('back/js/scripts.js') }}"></script>
+            <script src="{{ ('back/js/jquery.showmore.js') }}"></script>
+        {% endblock %}
+</body>
+</html>

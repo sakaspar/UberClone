@@ -1,0 +1,162 @@
+{% extends 'ClientBundle::master.html.twig' %}
+
+{% block content %}
+
+
+
+
+    <!-- Titlebar
+================================================== -->
+    <div id="titlebar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h2>Mes Trajets</h2>
+
+                    <!-- Breadcrumbs -->
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li><a href="{{ url('client_homepage') }}">Home</a></li>
+                            <li>Mes Trajets</li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Content
+================================================== -->
+    <div class="container">
+        <div class="row">
+
+
+
+
+
+
+            <div class="col-md-12">
+
+                <div id="success_message" class="notification success closeable hidden">
+                    <p id="success_message_content"><span>Success!</span> You did it, now relax and enjoy it.</p>
+                    <a class="close"></a>
+                </div>
+                <div id="error_message" class="notification error closeable hidden">
+                    <p id="error_message_content"><span>Error!</span> Please fill in all the fields required.</p>
+                    <a class="close"></a>
+                </div>
+
+
+                <div class="col-md-12" style="display: flex;justify-content: flex-end">
+                    <form method="post" action="{{ path("supprimer") }}" name="formDel" onsubmit="confirm('Voulez vous vraiment supprimer ?')">
+
+                        <input type="hidden" name="toDel" id="toDel" />
+
+                        <input type="submit" id="delBtn" class="btn btn-danger" style="background:darkred;text-align: center" value="Supprimer">
+
+                    </form>
+
+                </div>
+
+
+                <table class="manage-table responsive-table table-hover" id="affTab">
+
+                    <tr>
+                        <th>Date de depart </th>
+                        <th>Date d'arrivee</th>
+                        <th>Nombre de places disponibles</th>
+                        <th>Prix</th>
+                    </tr>
+
+                    {% for ch in trajets %}
+                        <tr style="cursor: pointer;" data-id="{{ ch.id }}">
+
+                            <td>
+                                {{ ch.villeDepart }}
+                            </td>
+                            <td>
+                                {{ ch.villeArrivee }}
+                            </td>
+                            <td>
+                                {{ ch.nbPlaces }}
+                            </td>
+                            <td>
+                                <span class="table-property-price">{{ ch.prix }} DT </span>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+
+
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+
+    <script>
+        $(document).on("ready",function () {
+
+            $("#affTab tr").on("click",function () {
+               $(this).toggleClass("bg-danger");
+            });
+
+            $("#delBtn").on("click",function () {
+                
+                $("#affTab tr").each(function (key,value) {
+                    if($(this).hasClass("bg-danger"))
+                    {
+                        let curr=$("#toDel").val();
+
+                        $("#toDel").val(curr+$(this).attr("data-id")+",");
+
+                    }
+                });
+
+            })
+        });
+
+        function suppChauffeur(id){
+            var check = confirm("Vous etes sure de supprimer cette chauffeur ?");
+            if(check){
+                document.getElementById(id).click();
+            }else{
+
+            }
+        }
+    </script>
+    {% if app.session.flashBag.has('success') %}
+        {% for msg in app.session.flashBag.get('success') %}
+            <script>
+                $('#success_message_content').html('<span>Succée!</span> {{ msg }}');
+                $('#success_message').removeClass('hidden');
+            </script>
+        {% endfor %}
+    {% endif %}
+
+    {% if app.session.flashBag.has('error') %}
+        {% for msg in app.session.flashBag.get('error') %}
+            <script>
+                $('#error_message_content').html('<span>Erreur!</span> {{ msg }}');
+                $('#error_message').removeClass('hidden');
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+

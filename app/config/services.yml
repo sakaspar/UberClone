@@ -1,0 +1,16 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+#parameter_name: value
+
+services:
+
+    app.form.registration:
+        class: ClientBundle\Form\UserType
+        tags:
+            - { name: form.type, alias: app_client_registration }
+
+    app_bundle.service.listener:
+        class: AppBundle\Listener\LoadDataListener
+        tags:
+           - { name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadData }

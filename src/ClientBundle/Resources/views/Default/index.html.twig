@@ -1,0 +1,43 @@
+{% extends 'ClientBundle::master.html.twig' %}
+
+{% block content %}
+
+    <!-- Banner
+    ================================================== -->
+    <div class="parallax" data-background="{{ asset('client/images/covoiturage.jpg') }}" data-color="#36383e" data-color-opacity="0.45" data-img-width="2500" data-img-height="1600">
+        <div class="parallax-content">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <!-- Main Search Container -->
+                        <div class="main-search-container" style="height: 200px">
+                            <h2 >FI THNITY</h2>
+
+                        </div>
+                        <!-- Main Search Container / End -->
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container"></div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+    {% if app.session.flashBag.has('success') %}
+        {% for msg in app.session.flashBag.get('success') %}
+            <script>
+                alert('{{ msg }}');
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

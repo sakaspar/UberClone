@@ -1,0 +1,20 @@
+client_homepage:
+    path:     /
+    defaults: { _controller: ClientBundle:Default:index }
+
+ajouter:
+    path:     /ajout
+    defaults: { _controller: ClientBundle:reservation:ajout }
+
+afficher:
+    path:     /afficher
+    defaults: { _controller: ClientBundle:reservation:afficher }
+
+supprimer:
+    path:     /supprimer
+    defaults: { _controller: ClientBundle:reservation:supprimer }
+
+reserver:
+    path:     /reserver
+    defaults: { _controller: ClientBundle:reservation:reserverTrajet }
+

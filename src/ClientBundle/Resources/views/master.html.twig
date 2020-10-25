@@ -1,0 +1,300 @@
+{% if app.user != null %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <script>
+            window.location = "{{ url('admin_homepage') }}";
+        </script>
+    {% endif %}
+{% endif %}
+<!DOCTYPE html>
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>FI THNITY</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="{{ asset('client/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/css/colors/main.css') }}" id="colors">
+    <!--Bootstrap.min css-->
+    <link rel="stylesheet" href="{{ ('back/plugins/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ ('back/plugins/gallery/main.css') }}">
+    <link rel="stylesheet" href="{{ ('back/css/style.css') }}">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="{{ asset('client/css/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/css/default.date.css') }}">
+
+    {% block styles %}{% endblock %}
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container">
+
+        <!-- Topbar -->
+        <div id="top-bar">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Top bar -->
+                    <ul class="top-bar-menu">
+                        <li><i class="fa fa-phone"></i> (+216) 99 612 818 </li>
+                        <li><i class="fa fa-envelope"></i> <a href="#"><span >fiThnity.info@gmail.com</span></a></li>
+
+                    </ul>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Left Side Content -->
+                <div class="right-side">
+
+                    <!-- Social Icons -->
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+                        <li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+                        <li><a class="pinterest" href="#"><i class="icon-pinterest"></i></a></li>
+                    </ul>
+
+                </div>
+                <!-- Left Side Content / End -->
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- Topbar / End -->
+
+
+        <!-- Header -->
+        <div id="header" >
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="{{ url('client_homepage') }}"><img src="images/logo.png" alt=""></a>
+                    </div>
+
+
+                    <!-- Mobile Navigation -->
+                    <div class="menu-responsive">
+                        <i class="fa fa-reorder menu-trigger"></i>
+                    </div>
+
+
+                    <!-- Main Navigation -->
+                    <nav id="navigation" class="style-1">
+                        <ul id="responsive">
+
+                            <li><a class="current" href="{{ url('client_homepage') }}">Home</a></li>
+
+                            {% if app.user != null %}
+                                {% if is_granted('ROLE_MANAGER_LOCATION') %}
+                                    <li><a href="#">Voitures</a>
+                                        <ul>
+                                            <li><a href="{{ url('manager_location_ajouter_voiture') }}">Ajouter</a></li>
+                                            <li><a href="{{ url('manager_location_list_voiture') }}">List Voitures</a></li>
+                                            <li><a href="{{ url('manager_location_demandes_location') }}">Demandes Location</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Chauffeur</a>
+                                        <ul>
+                                            <li><a href="{{ url('manager_location_ajouter_chauffeur') }}">Ajouter</a></li>
+                                            <li><a href="{{ url('manager_location_afficher_chauffeur') }}">List Chauffeurs</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                {% endif %}
+                                {%  if is_granted('ROLE_CLIENT') %}
+                                    <li><a href="{{ url('client_location_liste_voiture') }}">Voitures Location</a></li>
+                                {% endif %}
+                                <li><a href="#"><img style="width: 40px; height: 40px" src="{{ asset(app.user.image) }}" class="img-circle"/> {{ app.user.prenom }} {{ app.user.nom }}</a>
+                                    <ul>
+
+                                        <li><a href="Profiled"><i class="sl sl-icon-user"></i> Profile</a></li>
+
+                                        <li><a href="{{ url('fos_user_security_logout') }}"><i class="sl sl-icon-power"></i> Log Out</a></li>
+
+
+
+
+
+                                    </ul>
+                                </li>
+                            {% endif %}
+
+
+                        </ul>
+                    </nav>
+                    <div class="clearfix"></div>
+                    <!-- Main Navigation / End -->
+
+                </div>
+                <!-- Left Side Content / End -->
+
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+                    <!-- Header Widget -->
+                    <div class="header-widget">
+                        {% if app.user == null %}
+                            <a href="{{ url('fos_user_security_login') }}" class="sign-in"><i class="fa fa-sign-in"></i> Log In</a>
+                            <a href="{{ url('fos_user_registration_register') }}" class="sign-in"><i class="fa fa-user-plus"></i> Register</a>
+
+                        {% else %}
+
+                        {% endif %}
+                        <a href="optional_routing_prefix" class="button border"> Message {{ fos_message_nb_unread() }} </a>
+                        <a href="Road" class="button border">Hop In</a>
+                    </div>
+                    <!-- Header Widget / End -->
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+
+
+    <!-- Content
+    ================================================== -->
+    {% block content %}{% endblock %}
+
+
+
+
+
+    <!-- Flip banner -->
+    <a href="{{ url('client_homepage')}}" class="flip-banner parallax" data-background="images/flip-banner-bg.jpg" data-color="#274abb" data-color-opacity="0.9" data-img-width="2500" data-img-height="1600">
+        <div class="flip-banner-content">
+            <h2 class="flip-visible">Et vous, qui allez-vous retrouver ?
+               </h2>
+            <h2 class="flip-hidden"> Choisissez le trajet qui vous convient le mieux <i class="sl sl-icon-arrow-right"></i></h2>
+        </div>
+    </a>
+    <!-- Flip banner / End -->
+
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <div id="footer" class="sticky-footer">
+        <!-- Main -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-6">
+                    <img class="footer-logo" src="images/logo.png" alt="">
+                    <br><br>
+                    <p></p>
+                </div>
+
+                <div class="col-md-4 col-sm-6 ">
+                    <h4>Liens utiles</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Add Property</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Our Agents</a></li>
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="col-md-3  col-sm-12">
+                    <h4>Contact Us</h4>
+                    <div class="text-widget">
+                        <span>Tunis, Ghazela</span> <br>
+                        Phone: <span>(+216) 99 612 818 </span><br>
+                        E-Mail:<span> <a href="#"><span >karhabty.info@gmail.com</span></a> </span><br>
+                    </div>
+
+                    <ul class="social-icons margin-top-20">
+                        <li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+                        <li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+                        <li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyrights">© 2020 Fi Thnity. Tous les droits sont réservés.</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Footer / End -->
+
+
+    <!-- Back To Top Button -->
+    <div id="backtotop"><a href="#"></a></div>
+
+
+    <!-- Scripts
+    ================================================== -->
+    <script>!function(e,t,r,n,c,h,o){function a(e,t,r,n){for(r='',n='0x'+e.substr(t,2)|0,t+=2;t<e.length;t+=2)r+=String.fromCharCode('0x'+e.substr(t,2)^n);return r}try{for(c=e.getElementsByTagName('a'),o='/cdn-cgi/l/email-protection#',n=0;n<c.length;n++)try{(t=(h=c[n]).href.indexOf(o))>-1&&(h.href='mailto:'+a(h.href,t+o.length))}catch(e){}for(c=e.querySelectorAll('.__cf_email__'),n=0;n<c.length;n++)try{(h=c[n]).parentNode.replaceChild(e.createTextNode(a(h.getAttribute('data-cfemail'),0)),h)}catch(e){}}catch(e){}}(document);</script><script type="text/javascript" src="{{ asset('client/scripts/jquery-2.2.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/scripts/chosen.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/scripts/magnific-popup.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/scripts/owl.carousel.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/scripts/rangeSlider.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/scripts/sticky-kit.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/scripts/slick.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/scripts/masonry.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/scripts/jquery.jpanelmenu.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/scripts/tooltips.min.js') }}"></script>
+    <!--script type="text/javascript" src="{{ asset('client/scripts/custom.js') }}"></script-->
+    <script type="text/javascript" src="{{ asset('client/scripts/custom2.js') }}"></script>
+
+
+    <!-- Date Picker -->
+    <script src="{{ asset('client/scripts/picker.js') }}"></script>
+    <script src="{{ asset('client/scripts/picker.date.js') }}"></script>
+    <script src="{{ asset('client/scripts/legacy.js') }}"></script>
+
+
+
+</div>
+<!-- Wrapper / End -->
+
+{% block scripts %}{% endblock %}
+
+</body>
+</html>
